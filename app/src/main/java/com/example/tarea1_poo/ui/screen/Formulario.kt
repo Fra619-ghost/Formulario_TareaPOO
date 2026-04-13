@@ -1,11 +1,12 @@
 package com.example.tarea1_poo.ui.screen
 
+// Nota decudi hacerlo como el ejemplo que hizo en clase, ya que me parecio la forma sencilla y ordenada
+
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -27,6 +28,9 @@ import kotlinx.coroutines.launch
 
 @Composable
 fun FormularioPedido() {
+
+    //Aquí se definen las variables del formulario usando remember y mutableStateOf,
+    // lo que permite guardar los datos ingresados por el usuario y actualizar la interfaz automáticamente.
     var nombre by remember { mutableStateOf("") }
     var telefono by remember { mutableStateOf("") }
     var direccion by remember { mutableStateOf("") }
@@ -48,11 +52,11 @@ fun FormularioPedido() {
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
 
-    Scaffold(
+    Scaffold( // esta es la estructuira basica como un contenedor principal mas q todo
         snackbarHost = { SnackbarHost(snackbarHostState) }
     ) { padding ->
 
-        Column(
+        Column( // esta columna sirve mas que todo para organizar el formulario de manera vertical
             modifier = Modifier
                 .fillMaxSize()
                 .padding(padding)
@@ -65,13 +69,13 @@ fun FormularioPedido() {
 
             Spacer(modifier = Modifier.height(20.dp))
 
-            OutlinedTextField(
+            OutlinedTextField( //cada uno de estos son los campos de texto
                 value = nombre,
                 onValueChange = { nombre = it },
                 label = { Text("Nombre del cliente") },
                 isError = nombreError,
                 supportingText = {
-                    if (nombreError) {
+                    if (nombreError) { // estos son mss de error para validacion
                         Text("Debe tener al menos 3 caracteres")
                     }
                 }
@@ -165,7 +169,7 @@ fun FormularioPedido() {
                         cargando = false
                         mensajeEstado = "Pedido enviado correctamente"
                         snackbarHostState.showSnackbar("Pedido enviado")
-
+                        // esto limpia los campos
                         nombre = ""
                         telefono = ""
                         direccion = ""
@@ -181,7 +185,7 @@ fun FormularioPedido() {
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Button(
+            Button( // Esto es para reinicar o limpoar el formulario
                 onClick = {
                     nombre = ""
                     telefono = ""
